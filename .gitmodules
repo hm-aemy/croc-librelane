@@ -4,3 +4,6 @@
 [submodule "artistic/artistic"]
 	path = artistic/artistic
 	url = git@github.com:pulp-platform/artistic.git
+[submodule "librelane/IHP-Open-PDK"]
+	path = librelane/IHP-Open-PDK
+	url = https://github.com/IHP-GmbH/IHP-Open-PDK.git
