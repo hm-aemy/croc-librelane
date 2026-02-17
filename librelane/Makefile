@@ -1,6 +1,9 @@
 export CROC_ROOT := $(shell cd .. && pwd)
 export WORKDIR := $(shell pwd)
 
+export PDK_ROOT=IHP-Open-PDK
+export PDK=ihp-sg13g2
+
 .PHONY: bender
 bender: 
 	bender \
@@ -21,18 +24,18 @@ flist2yaml: src/croc.flist
 
 .PHONY: librelane
 librelane: 
-	PDK_ROOT=$(WORKDIR)/IHP-Open-PDK PDK=ihp-sg13g2 \
+	PDK_ROOT=$(WORKDIR)/$(PDK_ROOT) PDK=$(PDK) \
 	librelane --manual-pdk --run-tag croc-soc --overwrite \
 	config.yaml
 
 .PHONY: librelane-skip-synth
 librelane-skip-synth:
-	PDK_ROOT=$(WORKDIR)/IHP-Open-PDK PDK=ihp-sg13g2 \
+	PDK_ROOT=$(WORKDIR)/$(PDK_ROOT) PDK=$(PDK) \
 	librelane --manual-pdk --run-tag croc-soc_no_synth --with-initial-state runs/croc-soc/06-yosys-synthesis/state_out.json --from Checker.YosysUnmappedCells --overwrite \
 	config.yaml
 
 .PHONY: view-results
 view-results:
-	PDK_ROOT=$(WORKDIR)/IHP-Open-PDK PDK=ihp-sg13g2 \
+	PDK_ROOT=$(WORKDIR)/$(PDK_ROOT) PDK=$(PDK) \
 	librelane --manual-pdk --last-run --flow OpenInOpenROAD \
 	config.yaml
